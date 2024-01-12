@@ -1,0 +1,10 @@
+Comandos artisan laravel-----------------------------------------------
+
+- php artisan serve :: inicia el servidor
+- php make:controller [NombreController] --resource :: Crea un controlador, con la opcion --resource te lo crea con los metodos
+- php make:Model [NombreSingular] -m :: crea un modelo para las bases de datos y las migraciones
+- php artisan make:seeder [NombreSeeder] :: crea los seeder
+- php artisan db:seed :: ejecuta los seeder insertando los campos en la tabla
+- php artisan migrate :: ejecuta los modelos de las bases de datos
+
+- php artisan migrate:reset :: Si nos equivocamos y hacemos antes el comando migrate que el crear la tabla correctamente en las migraciones reseteamos el migrate

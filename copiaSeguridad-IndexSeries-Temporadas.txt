@@ -1,0 +1,173 @@
+//SERIES ------------------------------------------------------------------------------------------------------
+//SerieController --------------------------------------------------------
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class SerieController extends Controller
+{
+    public function index(){
+        $series =[
+            ["La casa de papel","Netflix",7],
+            ["Suite","Amazon Prime",3],
+            ["Como conoci a vuestra madre","Netflix",5],
+            ["El plan del diablo","HBO",4]
+        ];
+        $mensaje = "Pagina de series";
+        return view("series/index", ["series"=>$series,"mensaje"=>$mensaje]);
+    }
+}
+
+
+//Index series------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Main page</title>
+        <style>
+            table{
+                text-align: center;
+                border-radius: 10px;
+            }
+            td{
+                border: 1px solid black;
+                padding: 5px;
+                transition: all 0.3s;
+                border-radius: 5px;
+            }
+            td:hover{
+                background-color: black;
+                color: white;
+            }
+            thead:hover{
+                color: white;
+                background-color: grey;
+            }
+            thead:hover th{
+                border: 1px solid grey;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Pagina principal de las series</h1>
+        <p>{{$mensaje}}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Plataforma</th>
+                    <th>Temporadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach ($series as $serie)
+                    <tr>
+                        <td>{{$serie[0]}}</td>
+                        <td>{{$serie[1]}}</td>
+                        <td>{{$serie[2]}}</td>
+                    </tr>
+                @endforeach
+
+                <?php
+                    /*
+                        foreach ($series as $serie) {
+                            echo "<tr>";
+                            for($i = 0; $i<count($serie);$i++){
+                                echo "<td>".$serie[$i]."</td>";
+                            }
+                            echo "</tr>";
+                        }
+                    */
+                ?>
+            </tbody>
+        </table>
+    </body>
+</html>
+
+
+//TEMPORADAS --------------------------------------------------------------------------------------------
+
+//TemporadaController -----------------------------------------------------------------------------------
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TemporadaController extends Controller
+{
+    public function temporada(){
+        $temporadas = [
+            ["Suite",1,"Primera temporada",12],
+            ["Suite",2,"Segunda temporada",12],
+            ["Suite",3,"Tercera temporada",14],
+            ["La casa de papel",1,"Primera temporada",20],
+            ["La casa de papel",2,"Segunda temporada",21],
+            ["La casa de papel",3,"Tercera temporada",20],
+            ["La casa de papel",4,"Cuarta temporada",22],
+            ["La casa de papel",5,"Quinta temporada",20],
+            ["La casa de papel",6,"Sexta temporada",19],
+            ["La casa de papel",7,"Septima temporada",18]
+        ];
+        $mensaje = "Temporadas de las series";
+        return view("series/temporadas",["temporadas"=>$temporadas,"mensaje"=>$mensaje]);
+    }
+}
+
+//Temporada index --------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Temporadas</title>
+        <style>
+            table{
+                text-align: center;
+                font-size: 20px;
+            }
+            th{
+                border: 1px solid black;
+                padding: 5px;
+            }
+            td{
+                border: 1px solid black;
+                border-radius: 10px;
+                padding: 15px;
+                transition: all 0.3s;
+            }
+            td:hover{
+                background-color: grey;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>{{$mensaje}}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serie</th>
+                    <th>Numero temporada</th>
+                    <th>Nombre</th>
+                    <th>Capitulos</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($temporadas as $temporada)
+                    <tr>
+                        @foreach ($temporada as $elemento)
+                                <td>{{$elemento}}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </body>
+</html>
