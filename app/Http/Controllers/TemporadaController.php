@@ -14,7 +14,7 @@ class TemporadaController extends Controller
     {
         $temporadas = Temporada::all();
         $mensaje = "Temporadas de las series";
-        return view("series/temporadas",["temporadas"=>$temporadas,"mensaje"=>$mensaje]);
+        return view("temporadas/index",["temporadas"=>$temporadas,"mensaje"=>$mensaje]);
     }
 
     /**
@@ -22,7 +22,7 @@ class TemporadaController extends Controller
      */
     public function create()
     {
-        //
+        return view("temporadas/create");
     }
 
     /**
@@ -30,7 +30,13 @@ class TemporadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $temporadas = new Temporada;
+        $temporadas -> serie = $request -> input("serie");
+        $temporadas -> temporada = $request -> input("temporada");
+        $temporadas -> nombreTemporada = $request -> input("nombreTemporada");
+        $temporadas -> capitulos = $request -> input("capitulos");
+        $temporadas -> save();
+        return redirect("/temporadas");
     }
 
     /**
@@ -38,7 +44,8 @@ class TemporadaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $temporadas = Temporada::find($id);
+        return view("temporadas/show",["temporadas"=>$temporadas]);
     }
 
     /**
@@ -46,7 +53,8 @@ class TemporadaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $temporadas = Temporada::find($id);
+        return view("temporadas/edit",["temporadas"=>$temporadas]);
     }
 
     /**
@@ -54,7 +62,13 @@ class TemporadaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $temporadas = Temporada::find($id);
+        $temporadas -> serie = $request -> input("serie");
+        $temporadas -> temporada = $request -> input("temporada");
+        $temporadas -> nombreTemporada = $request -> input("nombreTemporada");
+        $temporadas -> capitulos = $request -> input("capitulos");
+        $temporadas -> save();
+        return redirect("/temporadas");
     }
 
     /**
@@ -62,6 +76,7 @@ class TemporadaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table("temporadas")->where("id","=",$id)->delete();
+        return redirect("/temporadas");
     }
 }

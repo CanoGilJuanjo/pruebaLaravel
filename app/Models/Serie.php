@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Serie extends Model
 {
     use HasFactory;
+    public function temporadasLista(){
+        return $this->hasMany(Temporada::class);
+    }
 }

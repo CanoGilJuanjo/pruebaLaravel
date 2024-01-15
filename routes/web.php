@@ -24,13 +24,5 @@ Route::get('/', function () {
 });
 */
 
-Route::get("/series/hola",function(){
-    return view("series/hola");
-});
-
-Route::get("/series/adios",function(){
-    return view("series/adios");
-});
-
-Route::get("/series",[SerieController::class,"index"]);
-Route::get("/temporadas",[TemporadaController::class,"index"]);
+Route::resource("/series",SerieController::class);
+Route::resource("/temporadas",TemporadaController::class);

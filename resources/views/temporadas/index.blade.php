@@ -3,30 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Main page</title>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Temporadas</title>
         <style>
             table{
                 text-align: center;
-                border-radius: 10px;
+                font-size: 20px;
+            }
+            th{
+                padding: 5px;
             }
             td{
                 border: 1px solid black;
-                padding: 5px;
+                border-radius: 10px;
+                padding: 15px;
                 transition: all 0.3s;
-                border-radius: 5px;
             }
             td:hover{
-                background-color: black;
-                color: white;
-            }
-            thead:hover{
-                color: white;
                 background-color: grey;
+                color: white;
             }
-            thead:hover th{
-                border: 1px solid grey;
+            
+            input[type="submit"]{
+                font-size: 20px;
+                padding: 5px;
+                margin: 0px;
             }
-
             input[value="🧿"]:hover{
                 background-color: aqua;
             }
@@ -39,38 +41,38 @@
         </style>
     </head>
     <body>
-        <h1>Pagina principal de las series</h1>
-        <p>{{$mensaje}}</p>
+        <h1>{{$mensaje}}</h1>
         <table>
             <thead>
                 <tr>
+                    <th>Serie</th>
+                    <th>Numero temporada</th>
                     <th>Nombre</th>
-                    <th>Plataforma</th>
-                    <th>Temporadas</th>
+                    <th>Capitulos</th>
                     <th></th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                
-                @foreach ($series as $serie)
+                @foreach ($temporadas as $temporada)
                     <tr>
-                        <td>{{$serie->titulo}}</td>
-                        <td>{{$serie->plataforma}}</td>
-                        <td>{{$serie->temporadas}}</td>
+                        <td>{{$temporada->serie->titulo}}</td>
+                        <td>{{$temporada->temporada}}</td>
+                        <td>{{$temporada->nombreTemporada}}</td>
+                        <td>{{$temporada->capitulos}}</td>
                         <td>
-                            <form action="{{route("series.show",["series"=>$serie->id])}}" method="get">
+                            <form action="{{route("temporadas.show",["temporada"=> $temporada->id])}}" method="get">
                                 <input type="submit" value="🧿">
                             </form>
                         </td>
                         <td>
-                            <form action="{{route("series.edit",["series"=>$serie->id])}}" method= "get">
+                            <form action="{{route("temporadas.edit",["temporada"=> $temporada->id])}}" method= "get">
                                 <input type="submit" value="📝">
                             </form>
                         </td>
                         <td>
-                            <form action="{{route("series.destroy",["series"=>$serie->id])}}" method="post">
+                            <form action="{{route("temporadas.destroy",["temporada"=> $temporada->id])}}" method="post">
                                 @csrf
                                 {{method_field("DELETE")}}
                                 <input type="submit" value="🗑️">
@@ -78,18 +80,6 @@
                         </td>
                     </tr>
                 @endforeach
-
-                <?php
-                    /*
-                        foreach ($series as $serie) {
-                            echo "<tr>";
-                            for($i = 0; $i<count($serie);$i++){
-                                echo "<td>".$serie[$i]."</td>";
-                            }
-                            echo "</tr>";
-                        }
-                    */
-                ?>
             </tbody>
         </table>
     </body>
